@@ -13,7 +13,7 @@ const Navbar = () => {
           <Image width={40} height={40} src="/logo-icon.png" alt="বাজার দর" />
           <div className="flex flex-col">
             <h2 className="text-2xl font-bold text-black">বাজার দর</h2>
-            <p className="text-xs text-neutral-500">{date}</p>
+            <p suppressHydrationWarning className="text-xs text-neutral-500">{date}</p>
           </div>
         </div>
 
