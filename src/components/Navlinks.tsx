@@ -24,7 +24,7 @@ const Navlinks = async() => {
         <span>{n.nameBn}</span>
       </Link>
     ))}
-  </div>
+  </div> 
 );
 
 };
