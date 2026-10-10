@@ -46,7 +46,7 @@ export default async function ProductDetails({
   const { slug } = await params;
 
   const res = await fetch(
-    "https://api.abcz.workers.dev/api/bazardor/products",
+    "https://openapi.programming-hero.com/api/bazardor/products",
   );
   if (!res.ok) return notFound();
 

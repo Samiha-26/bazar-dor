@@ -15,7 +15,7 @@ interface Product {
 
 export default async function TopFallers() {
   const res = await fetch(
-    "https://api.abcz.workers.dev/api/bazardor/products",
+    "https://openapi.programming-hero.com/api/bazardor/products",
   );
   const data = await res.json();
   const products: Product[] = data;

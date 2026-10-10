@@ -41,7 +41,7 @@ export default async function CategoryPage({
   const { sort } = await searchParams;
 
   const res = await fetch(
-    "https://api.abcz.workers.dev/api/bazardor/products"
+    "https://openapi.programming-hero.com/api/bazardor/products"
   );
   const data: Product[] = await res.json();
   const products = data.filter((p) => p.category === slug);
