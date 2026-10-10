@@ -12,7 +12,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (!isPending && !session) {
-      router.push("/signin");
+      router.push("/signin?error=unauthorized");
     }
   }, [isPending, session, router]);
 

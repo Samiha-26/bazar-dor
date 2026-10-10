@@ -40,7 +40,7 @@ export default async function ProductDetails({
   });
 
   if (!session) {
-    redirect("/signin");
+    redirect("/signin?error=unauthorized");
   }
 
   const { slug } = await params;

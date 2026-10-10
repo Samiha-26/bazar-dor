@@ -34,7 +34,7 @@ export default async function CategoryPage({
   });
 
   if (!session) {
-    redirect("/signin");
+    redirect("/signin?error=unauthorized");
   }
 
   const { slug } = await params;

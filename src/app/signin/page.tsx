@@ -4,8 +4,18 @@ import { authClient } from "@/lib/auth-client";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 export default function SignInPage() {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("error") === "unauthorized") {
+      toast.error("এই পেজটি দেখতে লগ ইন করুন", { id: "unauthorized" });
+    }
+  }, [searchParams]);
+
   const handleGooglesignIn = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
