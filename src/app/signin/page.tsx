@@ -59,7 +59,7 @@ export default function SignInPage() {
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-12 px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-8">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
-            সাইন ইন
+          সাইন ইন
         </h2>
         <p className="mt-2 text-sm text-gray-500">
           বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।
@@ -92,7 +92,7 @@ export default function SignInPage() {
               id="password"
               name="password"
               type="password"
-              autoComplete="new-password"
+              autoComplete="current-password"
               required
               className="appearance-none block w-full px-3 py-2.5 border border-gray-200 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-600 focus:border-green-600 sm:text-sm transition-colors bg-white"
               placeholder="কমপক্ষে ৮ অক্ষর"
@@ -138,7 +138,7 @@ export default function SignInPage() {
         <div className="mt-6 text-center text-sm text-gray-600">
           অ্যাকাউন্ট নেই?{' '}
           <Link href="/signup" className="font-semibold text-green-700 hover:text-green-800 transition-colors">
-             সাইন আপ করুন
+            সাইন আপ করুন
           </Link>
         </div>
       </div>
