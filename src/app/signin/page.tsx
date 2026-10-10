@@ -1,6 +1,22 @@
+'use client';
 import Link from 'next/link';
+import { authClient } from "@/lib/auth-client";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 export default function SignInPage() {
+  const handleGooglesignIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
+  const handleGithubsignIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "github"
+    });
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-12 px-4 sm:px-6 lg:px-8 bg-[#F8F9FA]">
       <div className="text-center mb-8">
@@ -50,14 +66,39 @@ export default function SignInPage() {
               type="submit"
               className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 transition-colors"
             >
-              অ্যাকাউন্ট তৈরি করুন
+              সাইন ইন করুন
             </button>
           </div>
         </form>
 
+        <div className="mt-5 flex items-center justify-center">
+          <div className="w-full border-t border-gray-200"></div>
+          <div className="px-4 text-xs font-medium text-gray-500 bg-white">অথবা</div>
+          <div className="w-full border-t border-gray-200"></div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-3 mt-5">
+          <button
+            type="button"
+            onClick={handleGooglesignIn}
+            className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-gray-300 rounded-lg shadow-sm text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 transition-colors"
+          >
+            <FcGoogle className="w-4 h-4" />
+            Google দিয়ে চালিয়ে যান
+          </button>
+          <button
+            type="button"
+            onClick={handleGithubsignIn}
+            className="flex-1 flex items-center justify-center gap-2 py-2 px-4 border border-gray-300 rounded-lg shadow-sm text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 transition-colors"
+          >
+            <FaGithub className="w-4 h-4" />
+            GitHub দিয়ে চালিয়ে যান
+          </button>
+        </div>
+
         <div className="mt-6 text-center text-sm text-gray-600">
           অ্যাকাউন্ট নেই?{' '}
-          <Link href="/signin" className="font-semibold text-green-700 hover:text-green-800 transition-colors">
+          <Link href="/signup" className="font-semibold text-green-700 hover:text-green-800 transition-colors">
              সাইন আপ করুন
           </Link>
         </div>
