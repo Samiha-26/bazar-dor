@@ -8,17 +8,36 @@ export default function SignInPage() {
   const handleGooglesignIn = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
+      callbackURL: "/"
     });
   };
 
   const handleGithubsignIn = async () => {
     const data = await authClient.signIn.social({
-      provider: "github"
+      provider: "github",
+      callbackURL: "/"
     });
   };
 
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const { data, error } = await authClient.signIn.email({
+      email,
+      password,
+      callbackURL: "/",
+    });
+
+    if (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-12 px-4 sm:px-6 lg:px-8 bg-[#F8F9FA]">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-12 px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-8">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
             সাইন ইন
@@ -29,7 +48,7 @@ export default function SignInPage() {
       </div>
 
       <div className="bg-white shadow-sm border border-gray-100 rounded-2xl w-full max-w-md p-6 sm:p-8 text-left">
-        <form className="space-y-5" action="#" method="POST">
+        <form onSubmit={onSubmit} className="space-y-5" action="#" method="POST">
 
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">

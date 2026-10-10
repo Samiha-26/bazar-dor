@@ -16,7 +16,7 @@ export default function SignUpPage() {
 
     const { data, error } = await authClient.signUp.email({
       ...user,
-      callbackURL: "/",
+      callbackURL: "/signin",
     });
 
     if (data) {
@@ -29,16 +29,18 @@ export default function SignUpPage() {
   const handleGooglesignIn = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
+      callbackURL: "/",
     });
   };
 
   const handleGithubsignIn = async () => {
     const data = await authClient.signIn.social({
-      provider: "github"
+      provider: "github",
+      callbackURL: "/",
     });
   };
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-12 px-4 sm:px-6 lg:px-8 bg-[#F8F9FA]">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-12 px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-8">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
           অ্যাকাউন্ট তৈরি করুন
