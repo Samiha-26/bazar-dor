@@ -7,6 +7,7 @@ const Navbar = () => {
   });
 
   return (
+    <div className="w-full bg-white">
     <div className="mx-auto flex w-full max-w-7xl flex-col px-4 py-3 font-semibold">
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-2">
@@ -29,6 +30,7 @@ const Navbar = () => {
         
       <Navlinks />
       </div>
+    </div>
     </div>
   );
 };

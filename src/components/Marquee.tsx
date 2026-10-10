@@ -23,7 +23,7 @@ const Marquee = async () => {
   const products: Product[] = data;
 
   return (
-    <div className="w-full overflow-hidden border-y border-base-300 bg-base-100">
+    <div className="w-full overflow-hidden border-y border-gray-200 bg-white">
       <MarqueeFast className="py-3" direction="right" speed={70} pauseOnHover>
         {products.map((p) => (
           <Link
