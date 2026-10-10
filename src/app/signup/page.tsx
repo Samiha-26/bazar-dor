@@ -5,10 +5,17 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import toast from "react-hot-toast";
 
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 export default function SignUpPage() {
-  const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
+  const router = useRouter();
+  const [isPending, setIsPending] = useState(false);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    setIsPending(true);
+    const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries()) as {
       name: string;
       email: string;
@@ -22,8 +29,11 @@ export default function SignUpPage() {
 
     if (error) {
       toast.error(error.message || "অ্যাকাউন্ট তৈরি করতে সমস্যা হয়েছে।");
+      setIsPending(false);
     } else {
       toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
+      router.push("/");
+      router.refresh();
     }
   };
   const handleGooglesignIn = async () => {
@@ -127,9 +137,10 @@ export default function SignUpPage() {
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 transition-colors"
+              disabled={isPending}
+              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              অ্যাকাউন্ট তৈরি করুন
+              {isPending ? "অ্যাকাউন্ট তৈরি হচ্ছে..." : "অ্যাকাউন্ট তৈরি করুন"}
             </button>
           </div>
 

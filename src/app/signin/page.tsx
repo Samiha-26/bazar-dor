@@ -4,11 +4,13 @@ import { authClient } from "@/lib/auth-client";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function SignInPage() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const [isPending, setIsPending] = useState(false);
 
   useEffect(() => {
     if (searchParams.get("error") === "unauthorized") {
@@ -32,6 +34,7 @@ export default function SignInPage() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsPending(true);
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
@@ -44,8 +47,11 @@ export default function SignInPage() {
 
     if (error) {
       toast.error(error.message || "লগইন করতে সমস্যা হয়েছে।");
+      setIsPending(false);
     } else {
       toast.success("সফলভাবে লগইন হয়েছে!");
+      router.push("/");
+      router.refresh();
     }
   };
 
@@ -96,9 +102,10 @@ export default function SignInPage() {
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 transition-colors"
+              disabled={isPending}
+              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              সাইন ইন করুন
+              {isPending ? "লগইন হচ্ছে..." : "সাইন ইন করুন"}
             </button>
           </div>
         </form>
