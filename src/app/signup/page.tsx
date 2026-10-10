@@ -1,7 +1,29 @@
-import React from 'react';
-import Link from 'next/link';
+'use client';
+import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
 
 export default function SignUpPage() {
+  const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const user = Object.fromEntries(formData.entries()) as {
+      name: string;
+      email: string;
+      password: string;
+    };
+
+    const { data, error } = await authClient.signUp.email({
+      ...user,
+      callbackURL: "/",
+    });
+
+    if (data) {
+      console.log(data);
+    }
+    if (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-12 px-4 sm:px-6 lg:px-8 bg-[#F8F9FA]">
       <div className="text-center mb-8">
@@ -14,9 +36,12 @@ export default function SignUpPage() {
       </div>
 
       <div className="bg-white shadow-sm border border-gray-100 rounded-2xl w-full max-w-md p-6 sm:p-8 text-left">
-        <form className="space-y-5" action="#" method="POST">
+        <form onSubmit={onSubmit} className="space-y-5" action="#" method="POST">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               নাম
             </label>
             <input
@@ -31,7 +56,10 @@ export default function SignUpPage() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               ইমেইল
             </label>
             <input
@@ -46,7 +74,10 @@ export default function SignUpPage() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               পাসওয়ার্ড
             </label>
             <input
@@ -60,9 +91,11 @@ export default function SignUpPage() {
             />
           </div>
 
-
           <div>
-            <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="confirm-password"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               পাসওয়ার্ড নিশ্চিত করুন
             </label>
             <input
@@ -87,15 +120,21 @@ export default function SignUpPage() {
         </form>
 
         <div className="mt-6 text-center text-sm text-gray-600">
-          অ্যাকাউন্ট আছে?{' '}
-          <Link href="/signin" className="font-semibold text-green-700 hover:text-green-800 transition-colors">
+          অ্যাকাউন্ট আছে?{" "}
+          <Link
+            href="/signin"
+            className="font-semibold text-green-700 hover:text-green-800 transition-colors"
+          >
             সাইন ইন করুন
           </Link>
         </div>
       </div>
 
       <div className="mt-8 text-center">
-        <Link href="/" className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors">
+        <Link
+          href="/"
+          className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors"
+        >
           &larr; হোম পেজে ফিরে যান
         </Link>
       </div>
