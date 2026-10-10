@@ -18,7 +18,7 @@ const Navlinks = async() => {
       <Link
         key={n.id}
         href={`/category/${n.slug}`}
-        className="flex shrink-0 items-center gap-1.5 whitespace-nowrap text-gray-700 hover:text-green-700"
+        className="flex shrink-0 items-center gap-1.5 whitespace-nowrap text-gray-700 hover:bg-green-700 hover:text-white p-2 rounded-[5px]"
       >
         <span className="text-base">{n.icon}</span>
         <span>{n.nameBn}</span>

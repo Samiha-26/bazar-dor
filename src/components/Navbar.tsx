@@ -27,7 +27,7 @@ const Navbar = () => {
 
       <div className="mt-3 flex w-full items-center border-t border-gray-200 pt-3">
         
-        <Navlinks />
+      <Navlinks />
       </div>
     </div>
   );
