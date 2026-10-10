@@ -28,7 +28,7 @@ const Marquee = async () => {
         {products.map((p) => (
           <Link
             key={p.id}
-            href={`/news/${p.slug}`}
+            href={`/product/${p.slug}`}
             className="mx-3 inline-flex shrink-0 items-center gap-3 whitespace-nowrap text-sm hover:underline font-semibold"
           >
             <span className="text-lg">{p.image}</span>

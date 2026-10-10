@@ -2,7 +2,11 @@ import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 
-const client = new MongoClient(process.env.MONGODB_URL as string);
+if (!process.env.MONGODB_URL) {
+  throw new Error("MONGODB_URL environment variable is missing. Please add it to your .env file or your deployment environment variables.");
+}
+
+const client = new MongoClient(process.env.MONGODB_URL);
 const db = client.db("bazar-dor");
 
 
