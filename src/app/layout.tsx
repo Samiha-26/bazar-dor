@@ -24,9 +24,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <Navbar/>
         <Marquee/>
-        <main className="max-w-7xl mx-auto">
-           <Hero/>
-           {children}</main>
+        <Hero/>
+        <main className="max-w-7xl mx-auto w-full">
+           {children}
+        </main>
       </body>
     </html>
   );

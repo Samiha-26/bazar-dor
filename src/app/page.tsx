@@ -1,6 +1,9 @@
+import TopRisers from "@/components/TopRisers";
 
 export default function Home() {
   return (
-   <h1>home</h1>
+    <div className="flex flex-col gap-4 pb-12">
+      <TopRisers />
+    </div>
   );
 }
