@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { authClient } from "@/lib/auth-client";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 export default function SignInPage() {
   const handleGooglesignIn = async () => {
@@ -32,7 +33,9 @@ export default function SignInPage() {
     });
 
     if (error) {
-      console.log(error);
+      toast.error(error.message || "লগইন করতে সমস্যা হয়েছে।");
+    } else {
+      toast.success("সফলভাবে লগইন হয়েছে!");
     }
   };
 

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 export default function AuthButtons() {
   const router = useRouter();
@@ -13,6 +14,7 @@ export default function AuthButtons() {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
+          toast.success("সফলভাবে লগ আউট হয়েছে!");
           router.push("/");
         }
       }

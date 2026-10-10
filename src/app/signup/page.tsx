@@ -3,6 +3,7 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 export default function SignUpPage() {
   const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
@@ -16,14 +17,13 @@ export default function SignUpPage() {
 
     const { data, error } = await authClient.signUp.email({
       ...user,
-      callbackURL: "/signin",
+      callbackURL: "/",
     });
 
-    if (data) {
-      console.log(data);
-    }
     if (error) {
-      console.log(error);
+      toast.error(error.message || "অ্যাকাউন্ট তৈরি করতে সমস্যা হয়েছে।");
+    } else {
+      toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
     }
   };
   const handleGooglesignIn = async () => {
