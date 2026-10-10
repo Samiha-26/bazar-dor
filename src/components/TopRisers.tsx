@@ -21,7 +21,7 @@ export default async function TopRisers() {
   const risers = products
     .filter((p) => p.change.dir === "up")
     .sort((a, b) => b.change.pct - a.change.pct)
-    .slice(0, 6); // Take top 6
+    .slice(0, 6);
 
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-8">
