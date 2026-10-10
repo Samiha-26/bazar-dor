@@ -31,7 +31,7 @@ export default function ProfilePage() {
     const formData = new FormData(e.currentTarget);
     const name = formData.get("name") as string;
 
-    const { data, error } = await authClient.updateUser({
+    const { error } = await authClient.updateUser({
       name: name,
     });
 

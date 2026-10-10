@@ -16,14 +16,21 @@ export default function SignUpPage() {
     e.preventDefault();
     setIsPending(true);
     const formData = new FormData(e.currentTarget);
-    const user = Object.fromEntries(formData.entries()) as {
-      name: string;
-      email: string;
-      password: string;
-    };
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const confirmPassword = formData.get("confirm-password") as string;
 
-    const { data, error } = await authClient.signUp.email({
-      ...user,
+    if (password !== confirmPassword) {
+      toast.error("পাসওয়ার্ড মিলছে না!");
+      setIsPending(false);
+      return;
+    }
+
+    const { error } = await authClient.signUp.email({
+      name,
+      email,
+      password,
       callbackURL: "/",
     });
 
@@ -37,14 +44,14 @@ export default function SignUpPage() {
     }
   };
   const handleGooglesignIn = async () => {
-    const data = await authClient.signIn.social({
+    await authClient.signIn.social({
       provider: "google",
       callbackURL: "/",
     });
   };
 
   const handleGithubsignIn = async () => {
-    const data = await authClient.signIn.social({
+    await authClient.signIn.social({
       provider: "github",
       callbackURL: "/",
     });
