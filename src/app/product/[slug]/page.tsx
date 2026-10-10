@@ -1,5 +1,7 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 interface Market {
   market: string;
@@ -33,6 +35,14 @@ export default async function ProductDetails({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    redirect("/signin");
+  }
+
   const { slug } = await params;
 
   const res = await fetch(

@@ -1,6 +1,9 @@
 import ProductCard from "@/components/ProductCard";
 import Link from "next/link";
 import SortSelect from "./SortSelect";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 interface Product {
   id: number;
@@ -18,6 +21,7 @@ interface Product {
   };
 }
 
+
 export default async function CategoryPage({
   params,
   searchParams,
@@ -25,6 +29,14 @@ export default async function CategoryPage({
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ sort?: string }>;
 }) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    redirect("/signin");
+  }
+
   const { slug } = await params;
   const { sort } = await searchParams;
 
